@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>nishkarsh</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+
+  <style>
+    /* General body styles */
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+   
+    /* Styles for the Telegram Banner link */
+    .tg-banner {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #1da1f2, #0077b5);
+      border-radius: 12px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tg-banner:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .tg-banner img {
+      width: 36px;
+      height: 36px;
+      margin-right: 12px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    .tg-banner span {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1000; 
+      padding-top: 100px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0, 0, 0, 0.5); 
+      animation: fadeIn 0.5s ease;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+      animation: slideIn 0.5s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideIn {
+      from {transform: translateY(-50px);}
+      to {transform: translateY(0);}
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .modal-content p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .modal-content button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-join {
+      background-color: #1da1f2;
+      color: white;
+    }
+
+    .btn-join:hover {
+      background-color: #0d8bd1;
+    }
+
+    .btn-cancel {
+      background-color: #f4f4f4;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+
+    .btn-cancel:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div id="jwplayerDiv">
+   
+    <script>
+      jwplayer("jwplayerDiv").setup({
+        file: "https://prod-sports-eng-cf.jiocinema.com/hls/live/2100307/hd_akamai_merged_avc_eng_cricket_m9_101224/master.m3u8",
+        autostart: true,
+        controls: true,
+        width: "100%",
+        aspectratio: "16:9"
+      });
+
+      window.addEventListener("load", function() {
+        setTimeout(showModal, 1000); // Show modal after 1 second
+
+        function showModal() {
+          var modal = document.createElement("div");
+          modal.classList.add("modal");
+          modal.innerHTML = `
+            <div class="modal-content">
+              <h2>Join Us on Telegram!</h2>
+              <p>For more updates and live cricket streaming, join our Telegram channel now!</p>
+              <button class="btn-join">Join</button>
+              <button class="btn-cancel">Cancel</button>
+            </div>
+          `;
+          document.body.appendChild(modal);
+          modal.style.display = "block";
+
+          // Add event listeners for the buttons
+          modal.querySelector(".btn-join").addEventListener("click", function() {
+            window.location.href = "https://t.me/+kfJZ4exLottkOTY1";
+          });
+
+          modal.querySelector(".btn-cancel").addEventListener("click", function() {
+            modal.style.display = "none";
+          });
+        }
+      });
+    </script>
+  </div><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Us on Telegram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .banner {
+            text-align: center;
+            background: linear-gradient(45deg, #1c92d2, #f2fcfe);
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+            animation: shine 2s infinite linear;
+            max-width: 100%;
+        }
+
+        .banner h1 {
+            margin: 0 0 10px;
+            font-size: 22px;
+        }
+
+        .banner p {
+            margin: 0 0 15px;
+            font-size: 14px;
+        }
+
+        .banner a {
+            text-decoration: none;
+            color: white;
+            background: #0088cc;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.3s;
+            font-size: 16px;
+            display: inline-block;
+        }
+
+        .banner a:hover {
+            background: #005f8b;
+            transform: scale(1.05);
+        }
+
+        @keyframes shine {
+            0% {box-shadow: 0 0 5px #fff;}
+            50% {box-shadow: 0 0 20px #fff;}
+            100% {box-shadow: 0 0 5px #fff;}
+        }
+
+        @media (max-width: 600px) {
+            .banner h1 {
+                font-size: 18px;
+            }
+
+            .banner p {
+                font-size: 12px;
+            }
+
+            .banner a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <h1>Join Our Telegram Channel</h1>
+            <p>Stay updated with the latest live cricket scores and updates!</p>
+            <a href="https://t.me/+kfJZ4exLottkOTY1" target="_blank">Join Now</a>
+        </div>
+    </div>
+</body>
+  </html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>nishkarsh</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="//content.jwplatform.com/libraries/SAHhwvZq.js"></script>
+  <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+
+  <style>
+    /* General body styles */
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    /* Styles for JWPlayer */
+    #jwplayerDiv {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto; /* Center the player with some top and bottom margin */
+      z-index: 1;
+    }
+
+    /* Styles for the Telegram Banner link */
+    .tg-banner {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #1da1f2, #0077b5);
+      border-radius: 12px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tg-banner:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .tg-banner img {
+      width: 36px;
+      height: 36px;
+      margin-right: 12px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    .tg-banner span {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1000; 
+      padding-top: 100px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0, 0, 0, 0.5); 
+      animation: fadeIn 0.5s ease;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+      animation: slideIn 0.5s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideIn {
+      from {transform: translateY(-50px);}
+      to {transform: translateY(0);}
+    }
+
+  </html>
