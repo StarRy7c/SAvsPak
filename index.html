@@ -5,7 +5,7 @@
   <title>nishkarsh</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <script src="//content.jwplatform.com/libraries/SAHhwvZq.js"></script>
   <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
 
   <style>
@@ -16,7 +16,15 @@
       background-color: #f4f4f4;
     }
 
-   
+    /* Styles for JWPlayer */
+    #jwplayerDiv {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto; /* Center the player with some top and bottom margin */
+      z-index: 1;
+    }
+
     /* Styles for the Telegram Banner link */
     .tg-banner {
       position: absolute;
@@ -261,104 +269,4 @@
         </div>
     </div>
 </body>
-  </html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>nishkarsh</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="//content.jwplatform.com/libraries/SAHhwvZq.js"></script>
-  <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
-
-  <style>
-    /* General body styles */
-    body {
-      margin: 0;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      background-color: #f4f4f4;
-    }
-
-    /* Styles for JWPlayer */
-    #jwplayerDiv {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 20px auto; /* Center the player with some top and bottom margin */
-      z-index: 1;
-    }
-
-    /* Styles for the Telegram Banner link */
-    .tg-banner {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: linear-gradient(135deg, #1da1f2, #0077b5);
-      border-radius: 12px;
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      color: white;
-      text-decoration: none;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .tg-banner:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .tg-banner img {
-      width: 36px;
-      height: 36px;
-      margin-right: 12px;
-      border-radius: 50%;
-      border: 2px solid white;
-    }
-
-    .tg-banner span {
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    /* Modal Styles */
-    .modal {
-      display: none; 
-      position: fixed; 
-      z-index: 1000; 
-      padding-top: 100px; 
-      left: 0;
-      top: 0;
-      width: 100%; 
-      height: 100%; 
-      overflow: auto; 
-      background-color: rgba(0, 0, 0, 0.5); 
-      animation: fadeIn 0.5s ease;
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      max-width: 400px;
-      border-radius: 10px;
-      animation: slideIn 0.5s ease;
-      text-align: center;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    @keyframes slideIn {
-      from {transform: translateY(-50px);}
-      to {transform: translateY(0);}
-    }
-
   </html>
