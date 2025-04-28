@@ -8,7 +8,7 @@
   body { margin: 0; font-family: Arial, sans-serif; background: #111; color: #fff; }
   .container { padding: 20px; }
   .match-list { display: flex; flex-wrap: wrap; gap: 20px; }
-  .match-card { background: #222; border: 1px solid #333; border-radius: 8px; padding: 10px; width: 250px; cursor: pointer; text-align: center; transition: 0.3s; }
+  .match-card { background: #222; border: 1px solid #333; border-radius: 8px; padding: 10px; width: 280px; cursor: pointer; text-align: center; transition: 0.3s; }
   .match-card:hover { background: #333; }
   .match-card img { width: 100%; height: auto; border-radius: 6px; }
   .match-title { margin-top: 10px; font-size: 16px; font-weight: bold; }
@@ -34,19 +34,20 @@ async function loadMatches() {
   const globalKid = data.kid;
   const globalKey = data.key;
 
-  data.matches.forEach((match) => {
+  data.matches.forEach((match, index) => {
     const card = document.createElement('div');
     card.className = 'match-card';
     card.innerHTML = `
       <img src="${match.cover}" alt="${match.title}">
       <div class="match-title">${match.title}</div>
-      <div class="link-buttons" id="links-${match.title.replace(/\\s+/g, '')}"></div>
+      <div class="link-buttons" id="links-${index}"></div>
     `;
 
     matchList.appendChild(card);
 
-    const linksDiv = document.getElementById(`links-${match.title.replace(/\\s+/g, '')}`);
+    const linksDiv = document.getElementById(`links-${index}`);
 
+    // Now add buttons if links exist
     if (match.fastly) {
       const btn = createButton('Fastly', match.fastly, globalKid, globalKey);
       linksDiv.appendChild(btn);
