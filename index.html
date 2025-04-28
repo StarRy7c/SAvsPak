@@ -31,6 +31,9 @@ async function loadMatches() {
   const data = await response.json();
   const matchList = document.getElementById('matchList');
 
+  const globalKid = data.kid;
+  const globalKey = data.key;
+
   data.matches.forEach((match) => {
     const card = document.createElement('div');
     card.className = 'match-card';
@@ -44,28 +47,29 @@ async function loadMatches() {
 
     const linksDiv = document.getElementById(`links-${match.title.replace(/\\s+/g, '')}`);
 
-    // Now add buttons for available links
-    if (match.fastlyfull) {
-      const btn = createButton('Fastly', match.fastlyfull);
+    if (match.fastly) {
+      const btn = createButton('Fastly', match.fastly, globalKid, globalKey);
       linksDiv.appendChild(btn);
     }
-    if (match.cloudfrontfull) {
-      const btn = createButton('Cloudfront', match.cloudfrontfull);
+    if (match.cloudfront) {
+      const btn = createButton('Cloudfront', match.cloudfront, globalKid, globalKey);
       linksDiv.appendChild(btn);
     }
-    if (match.backupfull) {
-      const btn = createButton('Backup', match.backupfull);
+    if (match.backup) {
+      const btn = createButton('Backup', match.backup, globalKid, globalKey);
       linksDiv.appendChild(btn);
     }
   });
 }
 
 // Helper function to create a button
-function createButton(name, fullLink) {
+function createButton(name, streamUrl, kid, key) {
   const button = document.createElement('button');
   button.innerText = name;
   button.onclick = () => {
-    window.open(fullLink, '_blank');
+    const encodedStream = encodeURIComponent(streamUrl);
+    const finalUrl = `https://starry7c.github.io/Willow-p?url=${encodedStream}&kid=${kid}&key=${key}`;
+    window.open(finalUrl, '_blank');
   };
   return button;
 }
