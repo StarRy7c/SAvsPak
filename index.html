@@ -1,31 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Willow Live Matches</title>
-<style>
-  body { margin: 0; font-family: Arial, sans-serif; background: #111; color: #fff; }
-  .container { padding: 20px; }
-  .match-list { display: flex; flex-wrap: wrap; gap: 20px; }
-  .match-card { background: #222; border: 1px solid #333; border-radius: 8px; padding: 10px; width: 280px; cursor: pointer; text-align: center; transition: 0.3s; }
-  .match-card:hover { background: #333; }
-  .match-card img { width: 100%; height: auto; border-radius: 6px; }
-  .match-title { margin-top: 10px; font-size: 16px; font-weight: bold; }
-  .link-buttons { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-  .link-buttons button { background: #0fc; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-  .link-buttons button:hover { background: #0aa; }
-</style>
-</head>
-<body>
-
-<div class="container">
-  <h1>Willow Live Matches</h1>
-  <div class="match-list" id="matchList"></div>
-</div>
-
 <script>
-// Load Matches from willow.json
 async function loadMatches() {
   const response = await fetch('https://raw.githubusercontent.com/drmlive/willow-live-events/main/willow.json');
   const data = await response.json();
@@ -34,20 +7,19 @@ async function loadMatches() {
   const globalKid = data.kid;
   const globalKey = data.key;
 
-  data.matches.forEach((match, index) => {
+  data.matches.forEach((match) => {
     const card = document.createElement('div');
     card.className = 'match-card';
     card.innerHTML = `
       <img src="${match.cover}" alt="${match.title}">
       <div class="match-title">${match.title}</div>
-      <div class="link-buttons" id="links-${index}"></div>
+      <div class="link-buttons" id="links-${match.title.replace(/\s+/g, '')}"></div>
     `;
 
     matchList.appendChild(card);
 
-    const linksDiv = document.getElementById(`links-${index}`);
+    const linksDiv = document.getElementById(`links-${match.title.replace(/\s+/g, '')}`);
 
-    // Now add buttons if links exist
     if (match.fastly) {
       const btn = createButton('Fastly', match.fastly, globalKid, globalKey);
       linksDiv.appendChild(btn);
@@ -63,7 +35,6 @@ async function loadMatches() {
   });
 }
 
-// Helper function to create a button
 function createButton(name, streamUrl, kid, key) {
   const button = document.createElement('button');
   button.innerText = name;
@@ -75,9 +46,5 @@ function createButton(name, streamUrl, kid, key) {
   return button;
 }
 
-// Start
 loadMatches();
 </script>
-
-</body>
-</html>
