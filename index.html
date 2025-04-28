@@ -45,20 +45,26 @@ async function loadMatches() {
 
     let serverCount = 1;
 
-    if (match.fastly) {
-      const btn = createButton(`Server ${serverCount} (Fastly)`, match.fastly, globalKid, globalKey);
-      linksDiv.appendChild(btn);
-      serverCount++;
+    if (Array.isArray(match.fastly)) {
+      match.fastly.forEach(url => {
+        const btn = createButton(`Server ${serverCount} (Fastly)`, url, globalKid, globalKey);
+        linksDiv.appendChild(btn);
+        serverCount++;
+      });
     }
-    if (match.cloudfront) {
-      const btn = createButton(`Server ${serverCount} (Cloudfront)`, match.cloudfront, globalKid, globalKey);
-      linksDiv.appendChild(btn);
-      serverCount++;
+    if (Array.isArray(match.cloudfront)) {
+      match.cloudfront.forEach(url => {
+        const btn = createButton(`Server ${serverCount} (Cloudfront)`, url, globalKid, globalKey);
+        linksDiv.appendChild(btn);
+        serverCount++;
+      });
     }
-    if (match.backup) {
-      const btn = createButton(`Server ${serverCount} (Backup)`, match.backup, globalKid, globalKey);
-      linksDiv.appendChild(btn);
-      serverCount++;
+    if (Array.isArray(match.backup)) {
+      match.backup.forEach(url => {
+        const btn = createButton(`Server ${serverCount} (Backup)`, url, globalKid, globalKey);
+        linksDiv.appendChild(btn);
+        serverCount++;
+      });
     }
   });
 }
@@ -81,5 +87,5 @@ function createButton(name, streamUrl, kid, key) {
 }
 
 loadMatches();
-</script> </body>  
+</script></body>  
 </html>
