@@ -1,4 +1,3 @@
-Its didn't able to to fetch the link and keys from json and show on page with different button for different link
 
 <!DOCTYPE html>  <html lang="en">  
 <head>  
@@ -36,6 +35,7 @@ async function loadMatches() {
     card.innerHTML = `
       <img src="${match.cover}" alt="${match.title}">
       <div class="match-title">${match.title}</div>
+      <div class="match-date">${match.datetime}</div>
       <div class="link-buttons" id="links-${match.title.replace(/\s+/g, '')}"></div>
     `;
 
@@ -43,17 +43,28 @@ async function loadMatches() {
 
     const linksDiv = document.getElementById(`links-${match.title.replace(/\s+/g, '')}`);
 
-    if (match.fastly) {
-      const btn = createButton('Fastly', match.fastly, globalKid, globalKey);
-      linksDiv.appendChild(btn);
+    let serverCount = 1;
+
+    if (Array.isArray(match.fastly)) {
+      match.fastly.forEach(url => {
+        const btn = createButton(`Server ${serverCount} (Fastly)`, url, globalKid, globalKey);
+        linksDiv.appendChild(btn);
+        serverCount++;
+      });
     }
-    if (match.cloudfront) {
-      const btn = createButton('Cloudfront', match.cloudfront, globalKid, globalKey);
-      linksDiv.appendChild(btn);
+    if (Array.isArray(match.cloudfront)) {
+      match.cloudfront.forEach(url => {
+        const btn = createButton(`Server ${serverCount} (Cloudfront)`, url, globalKid, globalKey);
+        linksDiv.appendChild(btn);
+        serverCount++;
+      });
     }
-    if (match.backup) {
-      const btn = createButton('Backup', match.backup, globalKid, globalKey);
-      linksDiv.appendChild(btn);
+    if (Array.isArray(match.backup)) {
+      match.backup.forEach(url => {
+        const btn = createButton(`Server ${serverCount} (Backup)`, url, globalKid, globalKey);
+        linksDiv.appendChild(btn);
+        serverCount++;
+      });
     }
   });
 }
