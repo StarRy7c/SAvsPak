@@ -22,7 +22,7 @@
   <div class="match-list" id="matchList"></div>  
 </div>  <script>
 async function loadMatches() {
-  const response = await fetch('https://raw.githubusercontent.com/drmlive/willow-live-events/main/willow.json');
+  const response = await fetch('https://raw.githubusercontent.com/starry7c/SAvsl/main/willow.json');
   const data = await response.json();
   const matchList = document.getElementById('matchList');
 
@@ -45,26 +45,20 @@ async function loadMatches() {
 
     let serverCount = 1;
 
-    if (Array.isArray(match.fastly)) {
-      match.fastly.forEach(url => {
-        const btn = createButton(`Server ${serverCount} (Fastly)`, url, globalKid, globalKey);
-        linksDiv.appendChild(btn);
-        serverCount++;
-      });
+    if (match.fastly) {
+      const btn = createButton(`Server ${serverCount} (Fastly)`, match.fastly, globalKid, globalKey);
+      linksDiv.appendChild(btn);
+      serverCount++;
     }
-    if (Array.isArray(match.cloudfront)) {
-      match.cloudfront.forEach(url => {
-        const btn = createButton(`Server ${serverCount} (Cloudfront)`, url, globalKid, globalKey);
-        linksDiv.appendChild(btn);
-        serverCount++;
-      });
+    if (match.cloudfront) {
+      const btn = createButton(`Server ${serverCount} (Cloudfront)`, match.cloudfront, globalKid, globalKey);
+      linksDiv.appendChild(btn);
+      serverCount++;
     }
-    if (Array.isArray(match.backup)) {
-      match.backup.forEach(url => {
-        const btn = createButton(`Server ${serverCount} (Backup)`, url, globalKid, globalKey);
-        linksDiv.appendChild(btn);
-        serverCount++;
-      });
+    if (match.backup) {
+      const btn = createButton(`Server ${serverCount} (Backup)`, match.backup, globalKid, globalKey);
+      linksDiv.appendChild(btn);
+      serverCount++;
     }
   });
 }
@@ -72,6 +66,12 @@ async function loadMatches() {
 function createButton(name, streamUrl, kid, key) {
   const button = document.createElement('button');
   button.innerText = name;
+  button.style.margin = "5px";
+  button.style.padding = "10px";
+  button.style.backgroundColor = "#00ffff";
+  button.style.border = "none";
+  button.style.borderRadius = "10px";
+  button.style.cursor = "pointer";
   button.onclick = () => {
     const encodedStream = encodeURIComponent(streamUrl);
     const finalUrl = `https://starry7c.github.io/Willow-p?url=${encodedStream}&kid=${kid}&key=${key}`;
