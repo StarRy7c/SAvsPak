@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Willow Live Matches</title>
   <style>
     body {
       background-color: #111;
       color: #fff;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       padding: 20px;
       text-align: center;
     }
@@ -58,59 +58,49 @@
   </style>
 </head>
 <body>
-
   <h1>Willow Live Matches</h1>
   <div id="matchList"></div>
 
   <script>
     async function loadMatches() {
-      const response = await fetch('https://raw.githubusercontent.com/drmlive/willow-live-events/main/willow.json');
+      const response = await fetch('https://raw.githubusercontent.com/starry7c/SAvsl/main/willow.json');
       const data = await response.json();
       const matchList = document.getElementById('matchList');
-
-      const globalKid = data.kid;
-      const globalKey = data.key;
 
       data.matches.forEach((match) => {
         const card = document.createElement('div');
         card.className = 'match-card';
-        card.innerHTML = `
-          <img src="${match.cover}" alt="${match.title}">
-          <div class="match-title">${match.title}</div>
-          <div class="match-date">${match.datetime || 'No Date Provided'}</div>
-          <div class="link-buttons" id="links-${btoa(match.title)}"></div>
-        `;
 
+        const matchCover = match.cover;
+        const matchTitle = match.title;
+        const matchTime = match.startTime || 'TBD';
+
+        card.innerHTML = `
+          <img src="${matchCover}" alt="${matchTitle}">
+          <div class="match-title">${matchTitle}</div>
+          <div class="match-date">${new Date(matchTime).toLocaleString()}</div>
+          <div class="link-buttons" id="links-${match.titleId}"></div>
+        `;
         matchList.appendChild(card);
 
-        const linksDiv = document.getElementById(`links-${btoa(match.title)}`);
-        let serverCount = 1;
+        const linksDiv = document.getElementById(`links-${match.titleId}`);
 
-        ['fastly', 'cloudfront', 'backup'].forEach(source => {
-          if (Array.isArray(match[source])) {
-            match[source].forEach(url => {
-              const btn = createButton(`Play - ${source} ${serverCount}`, url, globalKid, globalKey);
-              linksDiv.appendChild(btn);
-              serverCount++;
-            });
-          }
-        });
+        const playback = match.playback_data;
+        if (playback && playback.urls && playback.keys && playback.keys.length > 0) {
+          const [kid, key] = playback.keys[0].split(':');
+          playback.urls.forEach((stream, index) => {
+            const button = document.createElement('button');
+            const encodedStream = encodeURIComponent(stream.url);
+            const finalUrl = `https://starry7c.github.io/Willow-p?url=${encodedStream}&kid=${kid}&key=${key}`;
+            button.textContent = `${stream.cdn} ${index + 1}`;
+            button.onclick = () => window.open(finalUrl, '_blank');
+            linksDiv.appendChild(button);
+          });
+        }
       });
-    }
-
-    function createButton(name, streamUrl, kid, key) {
-      const button = document.createElement('button');
-      button.innerText = name;
-      button.onclick = () => {
-        const encodedStream = encodeURIComponent(streamUrl);
-        const finalUrl = `https://starry7c.github.io/Willow-p?url=${encodedStream}&kid=${kid}&key=${key}`;
-        window.open(finalUrl, '_blank');
-      };
-      return button;
     }
 
     loadMatches();
   </script>
-
 </body>
 </html>
