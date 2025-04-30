@@ -64,7 +64,7 @@
 
   <script>
     async function loadMatches() {
-      const response = await fetch('https://raw.githubusercontent.com/drmlive/willow-live-events/main/willow.json');
+      const response = await fetch('https://raw.githubusercontent.com/starry7c/SAvsl/main/willow.json');
       const data = await response.json();
       const matchList = document.getElementById('matchList');
 
@@ -77,36 +77,24 @@
         card.innerHTML = `
           <img src="${match.cover}" alt="${match.title}">
           <div class="match-title">${match.title}</div>
-          <div class="match-date">${match.datetime}</div>
-          <div class="link-buttons" id="links-${match.title.replace(/\s+/g, '')}"></div>
+          <div class="match-date">${match.datetime || 'No Date Provided'}</div>
+          <div class="link-buttons" id="links-${btoa(match.title)}"></div>
         `;
 
         matchList.appendChild(card);
 
-        const linksDiv = document.getElementById(`links-${match.title.replace(/\s+/g, '')}`);
+        const linksDiv = document.getElementById(`links-${btoa(match.title)}`);
         let serverCount = 1;
 
-        if (Array.isArray(match.fastly)) {
-          match.fastly.forEach(url => {
-            const btn = createButton(`Server ${serverCount} (Fastly)`, url, globalKid, globalKey);
-            linksDiv.appendChild(btn);
-            serverCount++;
-          });
-        }
-        if (Array.isArray(match.cloudfront)) {
-          match.cloudfront.forEach(url => {
-            const btn = createButton(`Server ${serverCount} (Cloudfront)`, url, globalKid, globalKey);
-            linksDiv.appendChild(btn);
-            serverCount++;
-          });
-        }
-        if (Array.isArray(match.backup)) {
-          match.backup.forEach(url => {
-            const btn = createButton(`Server ${serverCount} (Backup)`, url, globalKid, globalKey);
-            linksDiv.appendChild(btn);
-            serverCount++;
-          });
-        }
+        ['fastly', 'cloudfront', 'backup'].forEach(source => {
+          if (Array.isArray(match[source])) {
+            match[source].forEach(url => {
+              const btn = createButton(`Play - ${source} ${serverCount}`, url, globalKid, globalKey);
+              linksDiv.appendChild(btn);
+              serverCount++;
+            });
+          }
+        });
       });
     }
 
